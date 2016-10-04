@@ -159,39 +159,39 @@ $( document ).ready(function() {
 		}
 	}
 
-	// $('button#flop').click(function(){
-	// 	showCard('.table-f1', 'Flop 1', tableCards[0].Img);
-	// 	showCard('.table-f2', 'Flop 2', tableCards[1].Img);
-	// 	showCard('.table-f3', 'Flop 3', tableCards[2].Img);
-	// 	checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 3);
-	// 	checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 3);
+	$('button#flop').click(function(){
+		showCard('.table-f1', 'Flop 1', tableCards[0].Img);
+		showCard('.table-f2', 'Flop 2', tableCards[1].Img);
+		showCard('.table-f3', 'Flop 3', tableCards[2].Img);
+		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 3);
+		checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 3);
 
-	// 	$(this).addClass("-disabled");
-	// });
+		$(this).addClass("-disabled");
+	});
 
-	// $('button#turn').click(function(){
-	// 	showCard('.table-f4', 'Turn', tableCards[3].Img);
-	// 	checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 4);
-	// 	checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 4);
+	$('button#turn').click(function(){
+		showCard('.table-f4', 'Turn', tableCards[3].Img);
+		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 4);
+		checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 4);
 
-	// 	$(this).addClass("-disabled");
-	// });
+		$(this).addClass("-disabled");
+	});
 
-	// $('button#river').click(function(){
-	// 	showCard('.table-f5', 'River', tableCards[4].Img);
-	// 	checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 5);
-	// 	checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 5);
+	$('button#river').click(function(){
+		showCard('.table-f5', 'River', tableCards[4].Img);
+		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 5);
+		checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 5);
 
-	// 	$(this).addClass("-disabled");
-	// });
+		$(this).addClass("-disabled");
+	});
 
-	showCard('.table-f1', 'River', tableCards[0].Img);
-	showCard('.table-f2', 'River', tableCards[1].Img);
-	showCard('.table-f3', 'River', tableCards[2].Img);
-	showCard('.table-f4', 'River', tableCards[3].Img);
-	showCard('.table-f5', 'River', tableCards[4].Img);
-	checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 5);
-	checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 5);
+	// showCard('.table-f1', 'River', tableCards[0].Img);
+	// showCard('.table-f2', 'River', tableCards[1].Img);
+	// showCard('.table-f3', 'River', tableCards[2].Img);
+	// showCard('.table-f4', 'River', tableCards[3].Img);
+	// showCard('.table-f5', 'River', tableCards[4].Img);
+	// checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 5);
+	// checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 5);
 
 
 	showCard('.p1-c1', p1Cards[0], p1CardsRaw[0].Img);
