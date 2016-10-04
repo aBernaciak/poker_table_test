@@ -1,0 +1,30 @@
+&, * {
+	box-sizing: border-box;
+}
+
+& {
+	font-size: $font-size;
+	line-height: 1.4;
+	font-family: OpenSans, sans-serif;
+}
+
+%nopadd {
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	@extend %nopadd;
+	margin-bottom: $padd;
+}
+
+small {
+	font-size: 0.8em;
+}
+
+ul li {
+	color: $primary-color;
+	span {
+		color: #000;
+	}
+}

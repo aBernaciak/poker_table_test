@@ -1,0 +1,19 @@
+$font-size: 12px;
+
+$gutter: 15px;
+$padd: 15px;
+
+$primary-color: #007ac2;
+
+$sm: 768;
+$md: 992;
+$lg: 1200;
+
+$cols: 12;
+
+$breakpoint: (
+	xs: 0,
+	sm: $sm,
+	md: $md,
+	lg: $lg
+);

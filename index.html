@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<title>Poker table</title>
+	<link rel="stylesheet" href="assets/css/front.css">
+</head>
+
+<body>
+	<div id="main-container">
+		<div class="glob_container">
+			<div class="glob_row">
+				<div class="glob_col -sm-4">
+					<h2>Player 1 hand</h2>
+
+					<div class="-sm-4">
+						<p class="card p1-c1">Card one: <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+
+					<div class="-sm-4">
+						<p class="card p1-c2">Card two : <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+				</div>
+				<div class="glob_col -sm-4">
+					<h2>Player 2 hand</h2>
+
+					<div class="-sm-4">
+						<p class="card p2-c1">Card one : <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+
+					<div class="-sm-4">
+						<p class="card p2-c2">Card one : <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+				</div>
+			</div>
+			<div class="glob_row">
+				<div class="glob_col -sm-6">
+					<h2>Table</h2>
+					<div class="-sm-2">
+						<p class="card table-f1">Flop one : <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+					<div class="-sm-2">
+						<p class="card table-f2">Flop two : <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+					<div class="-sm-2">
+						<p class="card table-f3">Flop three : <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+					<div class="-sm-2">
+						<p class="card table-f4">Turn : <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+					<div class="-sm-2">
+						<p class="card table-f5">River : <span></span></p>
+						<img src="assets/img/back.png" width="80px" height="120px">
+					</div>
+					<button type="button" class="glob_btn" id="flop">Flop</button>
+					<br>
+					<button type="button" class="glob_btn" id="turn">Turn</button>
+					<br>
+					<button type="button" class="glob_btn" id="river">River</button>
+				</div>
+			</div>
+			<div class="glob_row">
+				<div class="glob_col -sm-12">
+					<h2 class="figure-p1"></h2>
+					<h2 class="figure-p2"></h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="cards.js"></script>
+	<script type="application/javascript" src="js/main.js"></script>
+</body>
+</html>

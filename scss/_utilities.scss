@@ -1,0 +1,74 @@
+.glob_btn {
+	display: inline-block;
+	padding: 6px 15px;
+	cursor: pointer;
+	border: 1px solid #ddd;
+	color: $primary-color;
+
+	&.-lg {
+		padding: 13px 30px;
+	}
+	&.-disabled {
+		opacity: 0.4;
+		pointer-events: none;
+	}
+}
+
+.glob_hr {
+	height: 1px;
+	width: 100%;
+	background: #ddd;
+}
+.glob_font {
+	&.-xs { font-size: 0.8em; }
+	&.-sm { font-size: 1em; }
+	&.-md { font-size: 1.15em; }
+	&.-lg { font-size: 1.6em; }
+	&.-xlg { font-size: 2.15em; }
+	&.-normal { font-weight: 400; }
+}
+.glob_padd {
+	margin-bottom: $padd;
+	&.-x2 { margin-bottom: $padd * 2; }
+	&.-x3 { margin-bottom: $padd * 3; }
+	&.-x4 { margin-bottom: $padd * 4; }
+	&.-none { margin-bottom: 0 !important; }
+	&.-top { margin-top: $padd; }
+	&.-top-x2 { margin-top: $padd * 2; }
+}
+.glob_text {
+	&.-center { text-align: center; }
+	&.-left { text-align: left; }
+	&.-right { text-align: right; }
+}
+
+.glob_visible {
+	&.-xs, &.-sm, &.-md, &.-lg {
+		display: none !important;
+	}
+}
+
+@media screen and (max-width:$sm+px) {
+	.glob_hidden.-xs {
+		display: none !important;
+	}
+	.glob_visible.-xs {
+		display: block !important;
+	}
+}
+@media screen and (max-width:$md+px) {
+	.glob_hidden.-md {
+		display: none !important;
+	}
+	.glob_visible.-md {
+		display: block !important;
+	}
+}
+@media screen and (max-width:$lg+px) {
+	.glob_hidden.-lg {
+		display: none !important;
+	}
+	.glob_visible.-lg {
+		display: block !important;
+	}
+}
