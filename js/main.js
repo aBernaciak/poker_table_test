@@ -82,11 +82,14 @@ $( document ).ready(function() {
 					var checkTriple = false;
 
 					if (checkedCard1 == cardsTable[j].Number) {
-						alert('check');
 						console.log(checkedCard1);
 						checkTriple = true;
 					}
 					checkedCard1 = cardsTable[j].Number;
+
+					if (cardsP1[i].Number >= 11) {
+						cardsP1[i].Number = cardsP1[i].Name;
+					}
 
 					if (checkTriple == true) {
 						$('.figure-p1').text('Player 1 got 3triple ' + cardsP1[i].Number + '\'s.');
@@ -111,11 +114,14 @@ $( document ).ready(function() {
 					var	checkTriple = false;
 
 					if (checkedCard2 == cardsTable[j].Number) {
-						alert('check');
 						console.log(checkedCard2);
 						checkTriple = true;
 					}
 					checkedCard2 = cardsTable[j].Number;
+
+					if (cardsP2[i].Number >= 11) {
+						cardsP2[i].Number = cardsP2[i].Name;
+					}
 
 					if (checkTriple == true) {
 						$('.figure-p2').text('Player 2 got 3triple ' + cardsP2[i].Number + '\'s.');
@@ -137,6 +143,52 @@ $( document ).ready(function() {
 				}
 			}
 		}
+	}
+
+	function checkStraight(cardsP1, cardsP2, cardsTable, cardsTableCount) {
+
+		function arrayHelper(player) {
+			var arrNumbers = [];
+			for (var i = 0; i < cardsTableCount; i++) {
+		    	arrNumbers.push(cardsTable[i].Number);
+			}
+			for (var i = 0; i < player.length; i++) {
+		    arrNumbers.push(player[i].Number);
+			}
+			console.log(arrNumbers)
+			return arrNumbers;
+		}
+
+		var arrNames1 = arrayHelper(cardsP1);
+		var arrNames2 = arrayHelper(cardsP2);
+
+		function checkStraightHelper(arr, playerNumber) {
+			var ao = {};
+
+			arr.forEach(function (e) { ao[e] = true; });
+
+			//now loop all in arr, and then loop again for 5
+			arr.forEach(function (num) {
+			  	var count = 0, l;
+			  	for (l = 0; l < 5; l ++) {
+			    	if (ao[num + l]) count ++;
+		 	 	}
+
+		  		if (count === 5) {
+			    //found, push into arr just to show nice in console
+			    	var nums = [];
+			    	for (l = 0; l < 5; l ++) {
+			      		nums.push(num + l);
+			    	}
+
+			    	$('.figure-p' + playerNumber).text
+			    	('Player ' + playerNumber + ' got straight from ' + nums[nums.length - 1] + '.');
+			  	}
+			})
+		}
+
+		checkStraightHelper(arrNames1, 1);
+		checkStraightHelper(arrNames2, 2);
 	}
 
 	for (var i = 1; i >= 0; i--) {
@@ -164,22 +216,27 @@ $( document ).ready(function() {
 		showCard('.table-f2', 'Flop 2', tableCards[1].Img);
 		showCard('.table-f3', 'Flop 3', tableCards[2].Img);
 		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 3);
+		checkStraight(p1CardsRaw, p2CardsRaw, tableCards, 3);
 		checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 3);
 
+		$('button#turn').removeClass('-disabled');
 		$(this).addClass("-disabled");
 	});
 
 	$('button#turn').click(function(){
 		showCard('.table-f4', 'Turn', tableCards[3].Img);
 		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 4);
+		checkStraight(p1CardsRaw, p2CardsRaw, tableCards, 4);
 		checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 4);
-
+		
+		$('button#river').removeClass('-disabled');
 		$(this).addClass("-disabled");
 	});
 
 	$('button#river').click(function(){
 		showCard('.table-f5', 'River', tableCards[4].Img);
 		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 5);
+		checkStraight(p1CardsRaw, p2CardsRaw, tableCards, 5);
 		checkFlush(p1CardsRaw, p2CardsRaw, tableCards, 5);
 
 		$(this).addClass("-disabled");

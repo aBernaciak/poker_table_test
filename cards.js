@@ -38,19 +38,23 @@ var cards = [
         Img: 'assets/img/10_of_spades.png'
     }, {
         Suit: "Spades",
-        Number: "Jack",
+        Number: 11,
+        Name: 'Jack',
         Img: 'assets/img/jack_of_spades.png'
     }, {
         Suit: "Spades",
-        Number: "Queen",
+        Number: 12,
+        Name: 'Queen',
         Img: 'assets/img/queen_of_spades.png'
     }, {
         Suit: "Spades",
-        Number: "King",
+        Number: 13,
+        Name: 'King',
         Img: 'assets/img/king_of_spades.png'
     }, {
         Suit: "Spades",
-        Number: "Ace",
+        Number: 14,
+        Name: 'Ace',
         Img: 'assets/img/ace_of_spades.png'
     },{
         Suit: "Hearts",
@@ -100,23 +104,27 @@ var cards = [
         Img: 'assets/img/10_of_hearts.png'
     }, {
         Suit: "Hearts",
-        Number: "Jack",
+        Number: 11,
+        Name: 'Jack',
         drawn: false,
         Img: 'assets/img/jack_of_hearts.png'
     }, {
         Suit: "Hearts",
-        Number: "Queen",
+        Number: 12,
+        Name: 'Queen',
         drawn: false,
         Img: 'assets/img/queen_of_hearts.png'
     },
      {
         Suit: "Hearts",
-        Number: "King",
+        Number: 13,
+        Name: 'King',
         drawn: false,
         Img: 'assets/img/king_of_hearts.png'
     }, {
         Suit: "Hearts",
-        Number: "Ace",
+        Number: 14,
+        Name: 'Ace',
         drawn: false,
         Img: 'assets/img/ace_of_hearts.png'
     }, {
@@ -167,22 +175,26 @@ var cards = [
         Img: 'assets/img/10_of_diamonds.png'
     }, {
         Suit: "Diamonds",
-        Number: "Jack",
+        Number: 11,
+        Name: 'Jack',
         drawn: false,
         Img: 'assets/img/jack_of_diamonds.png'
     }, {
         Suit: "Diamonds",
-        Number: "Queen",
+        Number: 12,
+        Name: 'Queen',
         drawn: false,
         Img: 'assets/img/queen_of_diamonds.png'
     }, {
         Suit: "Diamonds",
-        Number: "King",
+        Number: 13,
+        Name: 'King',
         drawn: false,
         Img: 'assets/img/king_of_diamonds.png'
     }, {
         Suit: "Diamonds",
-        Number: "Ace",
+        Number: 14,
+        Name: 'Ace',
         drawn: false,
         Img: 'assets/img/ace_of_diamonds.png'
     }, {
@@ -232,22 +244,26 @@ var cards = [
         Img: 'assets/img/10_of_clubs.png'
     }, {
         Suit: "Clubs",
-        Number: "Jack",
+        Number: 11,
+        Name: 'Jack',
         drawn: false,
         Img: 'assets/img/jack_of_clubs.png'
     }, {
         Suit: "Clubs",
-        Number: "Queen",
+        Number: 12,
+        Name: 'Queen',
         drawn: false,
         Img: 'assets/img/queen_of_clubs.png'
     }, {
         Suit: "Clubs",
-        Number: "King",
+        Number: 13,
+        Name: 'King',
         drawn: false,
         Img: 'assets/img/king_of_clubs.png'
     }, {
         Suit: "Clubs",
-        Number: "Ace",
+        Number: 14,
+        Name: 'Ace',
         drawn: false,
         Img: 'assets/img/ace_of_clubs.png'
     }
