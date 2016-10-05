@@ -181,8 +181,31 @@ $( document ).ready(function() {
 			      		nums.push(num + l);
 			    	}
 
-			    	$('.figure-p' + playerNumber).text
-			    	('Player ' + playerNumber + ' got straight from ' + nums[nums.length - 1] + '.');
+			    	switch(nums[nums.length - 1]) {
+						case 14:
+						    $('.figure-p' + playerNumber).text
+				    		('Player ' + playerNumber + ' got straight from Ace.');
+						    break;
+
+						case 13:
+						    $('.figure-p' + playerNumber).text
+				    		('Player ' + playerNumber + ' got straight from King');
+						    break;
+
+						case 12:
+						    $('.figure-p' + playerNumber).text
+				    		('Player ' + playerNumber + ' got straight from Queen.');
+						    break;
+
+						case 11:
+						    $('.figure-p' + playerNumber).text
+				    		('Player ' + playerNumber + ' got straight from Jack');
+						    break;
+
+						default:
+					    	$('.figure-p' + playerNumber).text
+				    		('Player ' + playerNumber + ' got straight from ' + nums[nums.length - 1] + '.');
+					}
 			  	}
 			})
 		}
