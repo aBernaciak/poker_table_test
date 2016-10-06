@@ -27,47 +27,26 @@ $( document ).ready(function() {
 	}
 
 	function checkFlush(cardsP1, cardsP2, cardsTable, cardsTableCount) {
-		var flushCardsCount = 0, flushCardsCount2 = 0;
 		var tableSuitCardsCount = [];
 
-		for (var j = cardsTableCount - 1; j >= 0; j--) {
+		function checkFlushForPlayer(playerCards, playerNumber) {
+			var flushCount = 0;
+			for (var j = cardsTableCount - 1; j >= 0; j--) {
 
-				// if (j != 0 && cardsTable[j].Suit == cardsTable[j-1].Suit && j != 0) {
+				for (var i = 1; i >= 0; i--) {
+					if (playerCards[i].Suit == cardsTable[j].Suit) {
 
-				// 	tableSuitCardsCount++;
-				// 	if (tableSuitCardsCount > 2) {
-				// 		console.log(cardsTable[j].Suit);
-				// 	}
-				// }
-
-			for (var i = 1; i >= 0; i--) {
-
-				if (cardsP1[i].Suit == cardsTable[j].Suit) {
-
-					if (flushCardsCount == 5) {
-						$('.figure-p1').text('Player 1 got ' + cardsP1[i].Suit + ' flush.');
+						if (flushCount == 5) {
+							$('.figure-p' + playerNumber).text('Player ' + playerNumber + ' got ' + playerCards[i].Suit + ' flush.');
+						}
+						flushCount ++;
+						console.log('player' + playerNumber + ' ' + flushCount);
 					}
-					flushCardsCount++;
-					console.log('player1 ' + flushCardsCount);
 				}
-
-				if (cardsP2[i].Suit == cardsTable[j].Suit)	{
-
-					if (flushCardsCount2 == 5) {
-						$('.figure-p2').text('Player 2 got ' + cardsP2[i].Suit + ' flush.');
-					}
-					flushCardsCount2++;
-					console.log('player2 ' + flushCardsCount2);
-				}
-
-				// if (flushCardsCount >= 5 && flushCardsCount2 >= 5) {
-				// 	$('.figure').text('Player 1 got ' + cardsP1[i].Suit + ' flush. Player 2 got ' + cardsP2[i].Suit + ' flush.');
-				// }
-				// else if (flushCardsCount2 == 5 && flushCardsCount == 5 ){
-				// 	$('.figure').text('Player 3 got flush.');
-				// }
 			}
 		}
+		checkFlushForPlayer(cardsP1, 1);
+		checkFlushForPlayer(cardsP2, 2);
 	}
 
 	function checkPairs(cardsP1, cardsP2, cardsTable, cardsTableCount) {
@@ -147,7 +126,7 @@ $( document ).ready(function() {
 
 	function checkStraight(cardsP1, cardsP2, cardsTable, cardsTableCount) {
 
-		function arrayHelper(player) {
+		function cutArray(player) {
 			var arrNumbers = [];
 			for (var i = 0; i < cardsTableCount; i++) {
 		    	arrNumbers.push(cardsTable[i].Number);
@@ -155,12 +134,11 @@ $( document ).ready(function() {
 			for (var i = 0; i < player.length; i++) {
 		    arrNumbers.push(player[i].Number);
 			}
-			console.log(arrNumbers)
 			return arrNumbers;
 		}
 
-		var arrNames1 = arrayHelper(cardsP1);
-		var arrNames2 = arrayHelper(cardsP2);
+		var arrNames1 = cutArray(cardsP1);
+		var arrNames2 = cutArray(cardsP2);
 
 		function checkStraightHelper(arr, playerNumber) {
 			var ao = {};
@@ -184,27 +162,27 @@ $( document ).ready(function() {
 			    	switch(nums[nums.length - 1]) {
 						case 14:
 						    $('.figure-p' + playerNumber).text
-				    		('Player ' + playerNumber + ' got straight from Ace.');
+				    		('Player ' + playerNumber + ' got straight from Ace to 10.');
 						    break;
 
 						case 13:
 						    $('.figure-p' + playerNumber).text
-				    		('Player ' + playerNumber + ' got straight from King');
+				    		('Player ' + playerNumber + ' got straight from King to 9.');
 						    break;
 
 						case 12:
 						    $('.figure-p' + playerNumber).text
-				    		('Player ' + playerNumber + ' got straight from Queen.');
+				    		('Player ' + playerNumber + ' got straight from Queen to 8.');
 						    break;
 
 						case 11:
 						    $('.figure-p' + playerNumber).text
-				    		('Player ' + playerNumber + ' got straight from Jack');
+				    		('Player ' + playerNumber + ' got straight from Jack to 7.');
 						    break;
 
 						default:
 					    	$('.figure-p' + playerNumber).text
-				    		('Player ' + playerNumber + ' got straight from ' + nums[nums.length - 1] + '.');
+				    		('Player ' + playerNumber + ' got straight from ' + nums[nums.length - 1] + ' to ' + nums[0] + '.');
 					}
 			  	}
 			})

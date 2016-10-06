@@ -13,9 +13,10 @@ section {
 	padding: 5px;
 	border-radius: 4px;
 	background-color: white;
+    transition: 1s all ease-in;
 }
 
-.table {
+.poker-table {
 	background-image: url('../img/table.jpg');
 	padding: 110px;
     background-repeat: no-repeat;
