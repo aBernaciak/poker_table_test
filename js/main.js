@@ -35,9 +35,8 @@ $( document ).ready(function() {
 		    	array.push(cardsTable[i].Number);
 			}
 			for (var i = 0; i < playerCards.length; i++) {
-		    array.push(playerCards[i].Number);
+		    	array.push(playerCards[i].Number);
 			}
-			console.log(array);
 			return array;
 		}
 		else if (property == 'suit') {
@@ -45,104 +44,176 @@ $( document ).ready(function() {
 		    	array.push(cardsTable[i].Suit);
 			}
 			for (var i = 0; i < playerCards.length; i++) {
-		    array.push(playerCards[i].Suit);
+		    	array.push(playerCards[i].Suit);
+			}
+			return array;
+		}
+		else if (property == 'raw') {
+			for (var i = 0; i < cardsTableCount; i++) {
+		    	array.push(cardsTable[i]);
+			}
+			for (var i = 0; i < playerCards.length; i++) {
+		    	array.push(playerCards[i]);
 			}
 			return array;
 		}
 	}
 
 	function checkFlush(cardsPlayer, cardsTable, cardsTableCount, playerNumber) {
+		var arrRaw = playerTableCards(cardsPlayer, cardsTable, cardsTableCount, 'raw');
 		var arrSuit = playerTableCards(cardsPlayer, cardsTable, cardsTableCount, 'suit');
 
+
 		var frequency = {};  // array of frequency.
-		var max = 0;  // holds the max frequency.
+		var max = 0, maxSuit = 0;  // holds the max frequency.
 		var result;   // holds the max frequency element.
 		for(var v in arrSuit) {
-		        frequency[arrSuit[v]]=(frequency[arrSuit[v]] || 0)+1; // increment frequency.
-		        if(frequency[arrSuit[v]] > max) { // is this frequency > max so far ?
-		                max = frequency[arrSuit[v]];  // update max.
-		                result = arrSuit[v];          // update result.
-		                if (max >= 5) {
-		                	$('.figure-p' + playerNumber).text
-			    			('Player ' + playerNumber + ' got ' + arrSuit[v] + ' flush.');
-		                }
-		        }
+	        frequency[arrSuit[v]]=(frequency[arrSuit[v]] || 0)+1; // increment frequency.
+	        if(frequency[arrSuit[v]] > max) { // is this frequency > max so far ?
+                max = frequency[arrSuit[v]];  // update max.
+                result = arrSuit[v];          // update result.
+                if (max >= 5) {
+
+        			arrRaw = arrRaw.filter(function( obj ) {return obj.Suit === result; });
+					maxSuit = Math.max.apply(Math,arrRaw.map(function(o){return o.Number;}))
+
+			    	switch(maxSuit) {
+					case 14:
+					    $('.figure-p' + playerNumber).text
+			    		('Player ' + playerNumber + ' got ' + arrSuit[v] + ' flush from Ace.');
+					    break;
+
+					case 13:
+					    $('.figure-p' + playerNumber).text
+			    		('Player ' + playerNumber + ' got ' + arrSuit[v] + ' flush from King.');
+					    break;
+
+					case 12:
+					    $('.figure-p' + playerNumber).text
+			    		('Player ' + playerNumber + ' got ' + arrSuit[v] + ' flush from Queen.');
+					    break;
+
+					case 11:
+					    $('.figure-p' + playerNumber).text
+			    		('Player ' + playerNumber + ' got ' + arrSuit[v] + ' flush from Jack.');
+					    break;
+
+					default:
+	                	$('.figure-p' + playerNumber).text
+		    			('Player ' + playerNumber + ' got ' + arrSuit[v] + ' flush from ' + maxSuit + '.');
+					}
+                }
+	        }
 		}
 	}
 
-	function checkPairs(cardsP1, cardsP2, cardsTable, cardsTableCount) {
-		var pairCount1 = 0, pairCount2 = 0;
-		var checkedCard1, checkedCard2;
+	function checkPairs(cardsPlayer, cardsTable, cardsTableCount, playerNumber) {
+		var arrNumbers = playerTableCards(cardsPlayer, cardsTable, cardsTableCount, 'number');
+		var double = [], trips = [], full = [], quads = [];
 
-		for (var j = cardsTableCount - 1; j >= 0; j--) {
+		for (var i = arrNumbers.length - 1; i >= 0; i--) {
+			var result = arrNumbers.filter(function(it) {return it === arrNumbers[i];});
 
-			for (var i = 1; i >= 0; i--) {
+			if (result.length === 2 && double.indexOf(result[0]) === -1) {
+				double.push(result[0]);
+				double.sort(function(a, b){return b-a});
+				if (double.length == 1) {
+					switch(double[0]) {
+					case 14:
+						$('.figure-p' + playerNumber).text
+		    			('Player ' + playerNumber + ' got pair of Aces\'s.');
+					    break;
 
-				if (cardsP1[i].Number == cardsTable[j].Number) {
-					var checkTriple = false;
+					case 13:
+						$('.figure-p' + playerNumber).text
+		    			('Player ' + playerNumber + ' got pair of King\'s');
+					    break;
 
-					if (checkedCard1 == cardsTable[j].Number) {
-						console.log(checkedCard1);
-						checkTriple = true;
-					}
-					checkedCard1 = cardsTable[j].Number;
+					case 12:
+						$('.figure-p' + playerNumber).text
+		    			('Player ' + playerNumber + ' got pair of Queen\'s');
+					    break;
 
-					if (cardsP1[i].Number >= 11) {
-						cardsP1[i].Number = cardsP1[i].Name;
-					}
+					case 11:
+						$('.figure-p' + playerNumber).text
+		    			('Player ' + playerNumber + ' got pair of Jack\'s');
+					    break;
 
-					if (checkTriple == true) {
-						$('.figure-p1').text('Player 1 got 3triple ' + cardsP1[i].Number + '\'s.');
-					}
-
-					else if (sameCards1 == false) {
-
-						$('.figure-p1').text('Player 1 got pair of ' + cardsP1[i].Number + '\'s.');
-
-						pairCount1++;
-						if (pairCount1 == 2) {
-							$('.figure-p1').text
-							('Player 1 got 2 pairs of ' + cardsP1[1].Number + '\'s and ' + cardsP1[0].Number + '\'s.');
-						}
-					}
-					else if (sameCards1 == true) {
-						$('.figure-p1').text('Player 1 got 3triple ' + cardsP1[i].Number + '\'s.');
+					default:
+				    	$('.figure-p' + playerNumber).text
+		    			('Player ' + playerNumber + ' got pair of ' + double[0] + '\'s.');
 					}
 				}
-
-				if (cardsP2[i].Number == cardsTable[j].Number) {
-					var	checkTriple = false;
-
-					if (checkedCard2 == cardsTable[j].Number) {
-						console.log(checkedCard2);
-						checkTriple = true;
-					}
-					checkedCard2 = cardsTable[j].Number;
-
-					if (cardsP2[i].Number >= 11) {
-						cardsP2[i].Number = cardsP2[i].Name;
-					}
-
-					if (checkTriple == true) {
-						$('.figure-p2').text('Player 2 got 3triple ' + cardsP2[i].Number + '\'s.');
-					}
-
-					else if (sameCards2 == false ) {
-
-						$('.figure-p2').text('Player 2 got pair of ' + cardsP2[i].Number + '\'s.');
-
-						pairCount2++;
-						if (pairCount2 == 2) {
-							$('.figure-p2').text
-							('Player 2 got 2 pairs of ' + cardsP2[1].Number + '\'s and ' + cardsP2[0].Number + '\'s.');
-						}
-					}
-					else if (sameCards2 == true) {
-						$('.figure-p2').text('Player 2 got 3triple ' + cardsP2[i].Number + '\'s.');
-					}
+				else if (double.length = 2) {
+					console.log('two pairs of ' + double[0] + ' and ' + double[1]);
+					$('.figure-p' + playerNumber).text
+		    		('Player ' + playerNumber + ' got 2 pairs of ' + double[0] + '\'s and ' +  double[1] + '\'s.');
 				}
 			}
+			else if (result.length === 3 && trips.indexOf(result[0]) === -1) {
+				trips.push(result[0]);
+				switch(double[0]) {
+				case 14:
+					$('.figure-p' + playerNumber).text
+	    			('Player ' + playerNumber + ' got trips of Ace\'s.');
+				    break;
+
+				case 13:
+					$('.figure-p' + playerNumber).text
+	    			('Player ' + playerNumber + ' got trips of King\'s.');
+				    break;
+
+				case 12:
+					$('.figure-p' + playerNumber).text
+	    			('Player ' + playerNumber + ' got trips of King\'s.');
+				    break;
+
+				case 11:
+					$('.figure-p' + playerNumber).text
+	    			('Player ' + playerNumber + ' got trips of Jack\'s.');
+				    break;
+
+				default:
+			    	$('.figure-p' + playerNumber).text
+		    		('Player ' + playerNumber + ' got trips of ' + trips[0] + '\'s.');
+				}
+			}
+			else if (result.length === 4 && quads.indexOf(result[0]) === -1) {
+				quads.push(result[0]);
+				switch(double[0]) {
+				case 14:
+					$('.figure-p' + playerNumber).text
+	    			('Player ' + playerNumber + ' got quads of Ace\'s.');
+				    break;
+
+				case 13:
+					$('.figure-p' + playerNumber).text
+	    			('Player ' + playerNumber + ' got quads of King\'s.');
+				    break;
+
+				case 12:
+					$('.figure-p' + playerNumber).text
+	    			('Player ' + playerNumber + ' got quads of King\'s.');
+				    break;
+
+				case 11:
+					$('.figure-p' + playerNumber).text
+	    			('Player ' + playerNumber + ' got quads of Jack\'s.');
+				    break;
+
+				default:
+			    	$('.figure-p' + playerNumber).text
+		    		('Player ' + playerNumber + ' got quads of ' + quads[0] + '\'s.');
+				}
+			}
+
+			if ( double.length == 1 && trips.length !== 0) {
+				$('.figure-p' + playerNumber).text
+	    		('Player ' + playerNumber + ' got full house. Trips: ' + trips[0] + '\'s. And pair of ' + double[0] + '\s.');
+			}
 		}
+		double.splice(0,-1)
+		console.log(double);
 	}
 
 	function checkStraight(cardsPlayer, cardsTable, cardsTableCount, playerNumber) {
@@ -219,7 +290,8 @@ $( document ).ready(function() {
 		showCard('.table-f1', tableCards[0].Img);
 		showCard('.table-f2', tableCards[1].Img);
 		showCard('.table-f3', tableCards[2].Img);
-		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 3);
+		checkPairs(p1CardsRaw, tableCards, 3, 1);
+		checkPairs(p2CardsRaw, tableCards, 3, 2);
 
 		checkStraight(p1CardsRaw, tableCards, 3, 1);
 		checkStraight(p2CardsRaw, tableCards, 3, 2);
@@ -233,7 +305,8 @@ $( document ).ready(function() {
 
 	$('button#turn').click(function(){
 		showCard('.table-f4', tableCards[3].Img);
-		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 4);
+		checkPairs(p1CardsRaw, tableCards, 4, 1);
+		checkPairs(p2CardsRaw, tableCards, 4, 2);
 
 		checkStraight(p1CardsRaw, tableCards, 4, 1);
 		checkStraight(p2CardsRaw, tableCards, 4, 2);
@@ -247,7 +320,8 @@ $( document ).ready(function() {
 
 	$('button#river').click(function(){
 		showCard('.table-f5', tableCards[4].Img);
-		checkPairs(p1CardsRaw, p2CardsRaw, tableCards, 5);
+		checkPairs(p1CardsRaw, tableCards, 5, 1);
+		checkPairs(p2CardsRaw, tableCards, 5, 2);
 
 		checkStraight(p1CardsRaw, tableCards, 5, 1);
 		checkStraight(p2CardsRaw, tableCards, 5, 2);
